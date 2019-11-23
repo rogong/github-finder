@@ -1,24 +1,19 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, useEffect } from "react";
 import Repos from '../repos/Repos';
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 
-export class User extends Component {
-  componentDidMount() {
-    this.props.getUser(this.props.match.params.login);
-    this.props.getUserRepos(this.props.match.params.login);
-  }
+const User = ( {user,loading,getUserRepos,getUser,match,repos,}) => {
 
-  static propTypes = {
-    loading: PropTypes.bool,
-    user: PropTypes.object.isRequired,
-    repos: PropTypes.array.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired
-  };
 
-  render() {
+  useEffect (() => {
+    getUser(match.params.login);
+    getUserRepos(match.params.login);
+    // eslint-disable-next-line 
+  }, []);
+
+
     const {
       name,
       avatar_url,
@@ -33,9 +28,7 @@ export class User extends Component {
       public_gists,
       public_repos,
       hireable
-    } = this.props.user;
-
-    const { loading, repos } = this.props;
+    } = user;
 
     if (loading) return <Spinner />;
     return (
@@ -98,7 +91,16 @@ export class User extends Component {
         <Repos repos={repos} />
       </Fragment>
     );
-  }
+
 }
+
+
+User.propTypes = {
+  loading: PropTypes.bool,
+  user: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired,
+  getUser: PropTypes.func.isRequired,
+  getUserRepos: PropTypes.func.isRequired
+};
 
 export default User;

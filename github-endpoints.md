@@ -32,3 +32,15 @@
 "user_repositories_url": "https://api.github.com/users/{user}/repos{?type,page,per_page,sort}",
 "user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}"
 }
+
+
+
+  //  async componentDidMount() {
+  //  this.setState({loading: true});
+
+  //    const res = await axios.get(`https://api.github.com/users?client_id=
+  //    ${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=
+  //    ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+
+  //    this.setState({users: res.data, loading: false});
+  //   }
